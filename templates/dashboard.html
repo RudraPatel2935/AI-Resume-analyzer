@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | AI Career Intelligence Platform{% endblock %}
+{% block content %}
+<section class="dashboard-hero mb-4 mb-lg-5">
+  <div>
+    <div class="eyebrow">Control center</div>
+    <h1 class="section-title mb-2">Your analysis dashboard</h1>
+    <p class="text-secondary mb-0">Track resume performance, recent analyses, and career positioning at a glance.</p>
+  </div>
+  <a class="btn btn-accent" href="{{ url_for('index') }}">New Analysis</a>
+</section>
+
+<div class="row g-3 g-lg-4 mb-4">
+  <div class="col-md-4">
+    <div class="stat-card accent-a h-100">
+      <div class="stat-label">Total analyses</div>
+      <div class="stat-value">{{ total_analyses }}</div>
+      <div class="stat-note">All resume checks in your account</div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="stat-card accent-b h-100">
+      <div class="stat-label">Average ATS score</div>
+      <div class="stat-value">{{ average_score }}%</div>
+      <div class="stat-note">Higher is better against your target roles</div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="stat-card accent-c h-100">
+      <div class="stat-label">Top category</div>
+      <div class="stat-value stat-clamp">{{ latest_category }}</div>
+      <div class="stat-note">Most recent prediction from the model</div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4 mb-4">
+  <div class="col-lg-7">
+    <div class="panel-card h-100">
+      <div class="panel-header mb-3">
+        <div>
+          <div class="panel-kicker">Analyze new resume</div>
+          <h2 class="panel-title mb-0">Paste a job description and upload a file</h2>
+        </div>
+      </div>
+      <form action="{{ url_for('resume.upload_resume') }}" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label class="form-label">Resume file</label>
+          <input type="file" name="resume_file" class="form-control form-control-lg soft-input" accept=".pdf,.docx" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Target job description</label>
+          <textarea name="job_description" class="form-control soft-input" rows="7" placeholder="Paste the target job description here" required></textarea>
+        </div>
+        <button class="btn btn-accent btn-lg">Run Analysis</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-lg-5">
+    <div class="panel-card h-100">
+      <div class="panel-header mb-3">
+        <div>
+          <div class="panel-kicker">Quick insights</div>
+          <h2 class="panel-title mb-0">What the platform is checking</h2>
+        </div>
+      </div>
+      <div class="insight-list">
+        <div class="insight-item"><span>ATS match</span><strong>TF-IDF + cosine similarity</strong></div>
+        <div class="insight-item"><span>Category prediction</span><strong>Trained classifier</strong></div>
+        <div class="insight-item"><span>Skill detection</span><strong>Domain keyword matching</strong></div>
+        <div class="insight-item"><span>Career guidance</span><strong>Rule-based feedback engine</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel-card">
+  <div class="panel-header mb-3">
+    <div>
+      <div class="panel-kicker">Analysis history</div>
+      <h2 class="panel-title mb-0">Recent resume checks</h2>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-modern align-middle mb-0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Score</th>
+          <th>Category</th>
+          <th>Missing Skills</th>
+          <th>Feedback</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for analysis in analyses %}
+          <tr>
+            <td>#{{ analysis.id }}</td>
+            <td><span class="score-pill">{{ analysis.ats_score }}%</span></td>
+            <td>{{ analysis.predicted_category }}</td>
+            <td class="text-wrap">{{ analysis.missing_skills or "-" }}</td>
+            <td class="text-wrap">{{ analysis.feedback or "-" }}</td>
+          </tr>
+        {% else %}
+          <tr><td colspan="5" class="text-muted py-4">No analyses yet. Run your first scan to populate this dashboard.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

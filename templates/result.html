@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block title %}Result | AI Career Intelligence Platform{% endblock %}
+{% block content %}
+<section class="result-hero mb-4 mb-lg-5">
+  <div>
+    <div class="eyebrow">Analysis complete</div>
+    <h1 class="section-title mb-2">Your resume intelligence report</h1>
+    <p class="text-secondary mb-0">A concise view of compatibility, skill coverage, and the next best improvements.</p>
+  </div>
+  <a class="btn btn-outline-light" href="{{ url_for('resume.dashboard') }}">Back to Dashboard</a>
+</section>
+
+<div class="row g-4">
+  <div class="col-lg-8">
+    <div class="panel-card mb-4">
+      <div class="panel-header mb-3">
+        <div>
+          <div class="panel-kicker">Score summary</div>
+          <h2 class="panel-title mb-0">ATS compatibility</h2>
+        </div>
+        <div class="score-badge">{{ analysis.ats_score }}%</div>
+      </div>
+      <div class="progress modern-progress mb-4">
+        <div class="progress-bar" style="width: {{ analysis.ats_score }}%"></div>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="metric-card">
+            <span>Predicted category</span>
+            <strong>{{ analysis.predicted_category }}</strong>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="metric-card">
+            <span>Matched skills</span>
+            <strong>{{ analysis.matched_skills or "None detected" }}</strong>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="metric-card">
+            <span>Missing skills</span>
+            <strong>{{ analysis.missing_skills or "None detected" }}</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="panel-card h-100">
+          <div class="panel-header mb-3">
+            <div>
+              <div class="panel-kicker">Career guidance</div>
+              <h2 class="panel-title mb-0">Recommended next steps</h2>
+            </div>
+          </div>
+          <div class="guidance-box">{{ analysis.feedback }}</div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="panel-card h-100">
+          <div class="panel-header mb-3">
+            <div>
+              <div class="panel-kicker">Detected match</div>
+              <h2 class="panel-title mb-0">Matched and missing skills</h2>
+            </div>
+          </div>
+          {% set matched_skills = analysis.matched_skills.split(', ') if analysis.matched_skills else [] %}
+          {% set missing_skills = analysis.missing_skills.split(', ') if analysis.missing_skills else [] %}
+          <div class="skill-chip-wrap mb-3">
+            {% for skill in matched_skills %}
+              <span class="skill-chip success">{{ skill }}</span>
+            {% else %}
+              <span class="text-muted">No matched skills detected</span>
+            {% endfor %}
+          </div>
+          <div class="skill-chip-wrap">
+            {% for skill in missing_skills %}
+              <span class="skill-chip warning">{{ skill }}</span>
+            {% else %}
+              <span class="text-muted">No missing skills detected</span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="panel-card mb-4">
+      <div class="panel-header mb-3">
+        <div>
+          <div class="panel-kicker">Interview prep</div>
+          <h2 class="panel-title mb-0">Suggested questions</h2>
+        </div>
+      </div>
+      <div class="question-stack">
+        {% for question in interview_questions %}
+          <div class="question-item">{{ question }}</div>
+        {% else %}
+          <div class="text-muted">Questions will appear after analysis.</div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="panel-card">
+      <div class="panel-header mb-3">
+        <div>
+          <div class="panel-kicker">Visual summary</div>
+          <h2 class="panel-title mb-0">ATS breakdown</h2>
+        </div>
+      </div>
+      <canvas id="atsChart" height="250"></canvas>
+    </div>
+  </div>
+</div>
+<script>
+  window.aiCareerStats = {{ analysis.ats_score | tojson }};
+</script>
+{% endblock %}

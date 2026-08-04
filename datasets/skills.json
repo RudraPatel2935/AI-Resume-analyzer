@@ -1,0 +1,8 @@
+{
+  "it": ["Python", "Java", "React", "SQL", "Docker", "AWS", "Machine Learning", "Flask", "Django", "Git"],
+  "mechanical": ["AutoCAD", "SolidWorks", "MATLAB", "CAD", "CAM"],
+  "civil": ["AutoCAD", "STAAD Pro", "Revit", "Construction Management", "Structural Analysis"],
+  "biomedical": ["Bioinformatics", "Medical Imaging", "Clinical Research", "Biostatistics", "PCR"],
+  "finance": ["Excel", "Accounting", "Financial Modeling", "Risk Analysis", "Taxation"],
+  "marketing": ["SEO", "Content Strategy", "Google Analytics", "CRM", "Brand Management"]
+}

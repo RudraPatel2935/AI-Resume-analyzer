@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block title %}Home | AI Career Intelligence Platform{% endblock %}
+{% block content %}
+<section class="hero-section mb-4 mb-lg-5">
+  <div class="row align-items-center g-4 g-lg-5">
+    <div class="col-lg-7">
+      <div class="eyebrow mb-3">AI career coach for multi-domain hiring</div>
+      <h1 class="hero-title">Turn a resume into a clear career signal.</h1>
+      <p class="hero-copy">
+        Analyze compatibility against any job description, predict the best-fit career category, surface skill gaps, and generate actionable guidance in one polished workflow.
+      </p>
+      <div class="d-flex gap-3 flex-wrap mb-4">
+        <a class="btn btn-primary btn-lg hero-btn" href="{{ url_for('auth.register') }}">Create Account</a>
+        <a class="btn btn-outline-light btn-lg hero-btn hero-btn-alt" href="{{ url_for('auth.login') }}">Sign In</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value">8</div>
+          <div class="hero-stat-label">Career domains covered</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">ATS</div>
+          <div class="hero-stat-label">Score + skill gap analysis</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">Coach</div>
+          <div class="hero-stat-label">Feedback and interview prep</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="feature-panel">
+        <div class="feature-panel-header">
+          <div>
+            <div class="panel-kicker">Analysis workspace</div>
+            <h2 class="panel-title mb-0">Upload resume and job description</h2>
+          </div>
+          <span class="status-pill">Ready</span>
+        </div>
+        {% if current_user.is_authenticated %}
+          <form action="{{ url_for('resume.upload_resume') }}" method="post" enctype="multipart/form-data" class="mt-4">
+            <div class="upload-zone mb-3">
+              <label class="form-label text-white-50">Resume file</label>
+              <input type="file" name="resume_file" class="form-control form-control-lg soft-input" accept=".pdf,.docx" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label text-white-50">Target job description</label>
+              <textarea name="job_description" class="form-control soft-input" rows="8" placeholder="Paste the target role description here..." required></textarea>
+            </div>
+            <button class="btn btn-accent w-100 btn-lg" type="submit">Run Analysis</button>
+          </form>
+        {% else %}
+          <div class="auth-callout mt-4">
+            <p class="mb-3 text-white-75">Create an account or sign in to unlock secure uploads, history tracking, and detailed results.</p>
+            <div class="d-flex gap-2 flex-wrap">
+              <a class="btn btn-accent" href="{{ url_for('auth.register') }}">Get Started</a>
+              <a class="btn btn-outline-light" href="{{ url_for('auth.login') }}">Login</a>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mb-4 mb-lg-5">
+  <div class="section-heading mb-3">
+    <div>
+      <div class="eyebrow">What you get</div>
+      <h2 class="section-title mb-0">A complete career intelligence experience</h2>
+    </div>
+  </div>
+  <div class="row g-3 g-lg-4">
+    <div class="col-md-6 col-lg-3">
+      <div class="mini-card h-100">
+        <div class="mini-icon">01</div>
+        <h3>Resume Analysis</h3>
+        <p>Extract text from PDF and DOCX resumes with a clean pipeline.</p>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="mini-card h-100">
+        <div class="mini-icon">02</div>
+        <h3>ATS Score</h3>
+        <p>See how closely the resume matches the target role and requirements.</p>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="mini-card h-100">
+        <div class="mini-icon">03</div>
+        <h3>Skill Gap Detection</h3>
+        <p>Identify missing keywords and practical skill improvements.</p>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="mini-card h-100">
+        <div class="mini-icon">04</div>
+        <h3>Career Guidance</h3>
+        <p>Generate direction, interview questions, and next-step recommendations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mb-2 mb-lg-4">
+  <div class="content-band">
+    <div>
+      <div class="eyebrow">Supported domains</div>
+      <h2 class="section-title mb-2">Built for broad cross-domain career matching</h2>
+      <p class="text-secondary mb-0">From software and data to engineering, finance, biomedical, and marketing.</p>
+    </div>
+    <div class="domain-tags">
+      <span>Software Engineering</span>
+      <span>Data Science</span>
+      <span>AI/ML</span>
+      <span>Mechanical</span>
+      <span>Civil</span>
+      <span>Biomedical</span>
+      <span>Finance</span>
+      <span>Marketing</span>
+    </div>
+  </div>
+</section>
+{% endblock %}
