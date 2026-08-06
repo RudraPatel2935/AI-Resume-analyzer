@@ -72,13 +72,18 @@ def upload_resume():
         return redirect(url_for("index"))
 
     cleaned_resume = clean_text(resume_text)
-    cleaned_job = clean_text(job_description)
     category = predict_category(cleaned_resume)
-    ats_result = analyze_ats(cleaned_resume, cleaned_job)
+    ats_result = analyze_ats(resume_text, job_description)
     skills_db = load_skills_database(current_app.config["SKILLS_FILE"])
     resume_skills = extract_skills(cleaned_resume, skills_db)
     missing_skills = ats_result["missing_skills"]
-    feedback = generate_feedback(missing_skills, category)
+    feedback = generate_feedback(
+        missing_skills,
+        category,
+        resume_text=resume_text,
+        job_description=job_description,
+        ats_details=ats_result,
+    )
 
     resume_record = Resume(
         user_id=current_user.id,
@@ -105,5 +110,12 @@ def upload_resume():
         analysis=analysis_record,
         resume_skills=resume_skills,
         ats_details=ats_result,
-        interview_questions=generate_feedback(missing_skills, category, as_questions=True),
+        interview_questions=generate_feedback(
+            missing_skills,
+            category,
+            resume_text=resume_text,
+            job_description=job_description,
+            ats_details=ats_result,
+            as_questions=True,
+        ),
     )

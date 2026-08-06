@@ -51,54 +51,27 @@ python app.py
 
 Open the local Flask server and register a user before running protected dashboard features.
 
-## Deploy On Google Cloud Run
+## Deploy On Render (Recommended)
 
-1. Install and initialize the Google Cloud CLI.
-2. Provision Cloud SQL for PostgreSQL and the runtime service account:
+This repository is ready for Render using Gunicorn and [render.yaml](render.yaml).
 
-```powershell
-.\setup-cloud-sql.ps1
-```
+1. Push this project to GitHub.
+2. In Render, click **New +** -> **Blueprint**.
+3. Connect your GitHub repo and select this project.
+4. Render will read [render.yaml](render.yaml) and create:
+   - A web service
+   - A managed PostgreSQL database
+5. After the first deploy, set your `SECRET_KEY` environment variable in the Render dashboard.
 
-This creates a local [cloudsql-settings.ps1](cloudsql-settings.ps1) file with the generated password, connection details, and service account email. Do not commit that file.
+### Environment Variables
 
-3. Set your project:
+- `DATABASE_URL` is automatically connected from the Render PostgreSQL service.
+- `SECRET_KEY` must be set manually to a strong random string.
 
-```bash
-gcloud config set project YOUR_PROJECT_ID
-```
+### Notes
 
-4. Enable required APIs:
-
-```bash
-gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com sqladmin.googleapis.com
-```
-
-5. Build and deploy from the project root:
-
-```bash
-gcloud run deploy ai-career-intelligence-platform \
-    --source . \
-    --region us-central1 \
-    --allow-unauthenticated \
-    --service-account ai-career-runner@YOUR_PROJECT_ID.iam.gserviceaccount.com \
-    --add-cloudsql-instances YOUR_PROJECT:us-central1:YOUR_INSTANCE \
-    --set-env-vars SECRET_KEY=your-secret-key,DB_NAME=your_db_name,DB_USER=your_db_user,DB_PASSWORD=your_db_password,CLOUD_SQL_CONNECTION_NAME=YOUR_PROJECT:us-central1:YOUR_INSTANCE
-```
-
-6. After deployment, Cloud Run will give you a public URL.
-
-For persistent data in production, use Cloud SQL for PostgreSQL and pass the instance connection name plus database credentials as shown above. If you already prefer a fully formed connection string, you can set `DATABASE_URL` directly and the app will use it.
-
-### Windows PowerShell helper
-
-You can also run the deployment script in the project root after provisioning Cloud SQL:
-
-```powershell
-.\deploy-cloud-run.ps1
-```
-
-If [cloudsql-settings.ps1](cloudsql-settings.ps1) exists, the deploy script uses it automatically.
+- The app uses PostgreSQL in production.
+- `uploads` are stored in `/tmp/uploads` in production, which is ephemeral.
 
 ## Screenshots
 

@@ -1,0 +1,18 @@
+{
+  "labels": [
+    "summary_issue",
+    "skills_issue",
+    "projects_issue",
+    "experience_issue",
+    "metrics_issue",
+    "keyword_alignment_issue"
+  ],
+  "thresholds": {
+    "summary_issue": 0.5,
+    "skills_issue": 0.35,
+    "projects_issue": 0.4,
+    "experience_issue": 0.45,
+    "metrics_issue": 0.6,
+    "keyword_alignment_issue": 0.4
+  }
+}
