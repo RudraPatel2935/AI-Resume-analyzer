@@ -1,6 +1,8 @@
 from flask import Flask
 import os
 
+from werkzeug.middleware.proxy_fix import ProxyFix
+
 from config import Config
 from database.db import db, login_manager, init_database
 from routes.auth import auth_bp
@@ -14,6 +16,9 @@ from models.user import User
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+
+    # Enable ProxyFix for Render HTTPS reverse proxy
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
 
     db.init_app(app)
     login_manager.init_app(app)

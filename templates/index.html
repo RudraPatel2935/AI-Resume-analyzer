@@ -7,7 +7,8 @@
       <div class="eyebrow mb-3">AI career coach for multi-domain hiring</div>
       <h1 class="hero-title">Turn a resume into a clear career signal.</h1>
       <p class="hero-copy">
-        Analyze compatibility against any job description, predict the best-fit career category, surface skill gaps, and generate actionable guidance in one polished workflow.
+        Analyze compatibility against any job description, predict the best-fit career category, surface skill gaps, and
+        generate actionable guidance in one polished workflow.
       </p>
       <div class="d-flex gap-3 flex-wrap mb-4">
         <a class="btn btn-primary btn-lg hero-btn" href="{{ url_for('auth.register') }}">Create Account</a>
@@ -38,25 +39,28 @@
           <span class="status-pill">Ready</span>
         </div>
         {% if current_user.is_authenticated %}
-          <form action="{{ url_for('resume.upload_resume') }}" method="post" enctype="multipart/form-data" class="mt-4">
-            <div class="upload-zone mb-3">
-              <label class="form-label text-white-50">Resume file</label>
-              <input type="file" name="resume_file" class="form-control form-control-lg soft-input" accept=".pdf,.docx" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label text-white-50">Target job description</label>
-              <textarea name="job_description" class="form-control soft-input" rows="8" placeholder="Paste the target role description here..." required></textarea>
-            </div>
-            <button class="btn btn-accent w-100 btn-lg" type="submit">Run Analysis</button>
-          </form>
-        {% else %}
-          <div class="auth-callout mt-4">
-            <p class="mb-3 text-white-75">Create an account or sign in to unlock secure uploads, history tracking, and detailed results.</p>
-            <div class="d-flex gap-2 flex-wrap">
-              <a class="btn btn-accent" href="{{ url_for('auth.register') }}">Get Started</a>
-              <a class="btn btn-outline-light" href="{{ url_for('auth.login') }}">Login</a>
-            </div>
+        <form action="{{ url_for('resume.upload_resume') }}" method="post" enctype="multipart/form-data" class="mt-4">
+          <div class="upload-zone mb-3">
+            <label class="form-label text-white-50">Resume file</label>
+            <input type="file" name="resume_file" class="form-control form-control-lg soft-input" accept=".pdf,.docx"
+              required>
           </div>
+          <div class="mb-3">
+            <label class="form-label text-white-50">Target job description</label>
+            <textarea name="job_description" class="form-control soft-input" rows="8"
+              placeholder="Paste the target role description here..." required></textarea>
+          </div>
+          <button class="btn btn-accent w-100 btn-lg" type="submit">Run Analysis</button>
+        </form>
+        {% else %}
+        <div class="auth-callout mt-4">
+          <p class="mb-3 text-white-75">Create an account or sign in to unlock secure uploads, history tracking, and
+            detailed results.</p>
+          <div class="d-flex gap-2 flex-wrap">
+            <a class="btn btn-accent" href="{{ url_for('auth.register') }}">Get Started</a>
+            <a class="btn btn-outline-light" href="{{ url_for('auth.login') }}">Login</a>
+          </div>
+        </div>
         {% endif %}
       </div>
     </div>
