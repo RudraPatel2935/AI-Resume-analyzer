@@ -5,5 +5,6 @@ __pycache__/
 *.pyo
 *.pyd
 database/app.db
-uploads/
+uploads/*
+!uploads/.gitkeep
 cloudsql-settings.ps1
