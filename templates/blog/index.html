@@ -5,21 +5,21 @@
 {% block content %}
 <div class="row mb-4">
   <div class="col-lg-10 mx-auto text-center">
-    <span class="badge bg-primary bg-opacity-25 text-primary px-3 py-2 rounded-pill fw-semibold mb-3">
+    <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill fw-bold mb-3 border border-primary border-opacity-25">
       📚 AI Career & Resume Intelligence Blog
     </span>
-    <h1 class="display-5 fw-extrabold text-white mb-3">Master Your Resume & Beat ATS Algorithms</h1>
-    <p class="lead text-light text-opacity-75 mb-4">
+    <h1 class="display-5 fw-extrabold text-dark mb-3 hero-title" style="color: #0f172a !important;">Master Your Resume & Beat ATS Algorithms</h1>
+    <p class="lead text-secondary mb-4" style="color: #475569 !important;">
       Expert career guides, action verb strategies, and step-by-step tips to optimize your resume for Google, LinkedIn, and corporate ATS screeners.
     </p>
 
     <!-- Search & Filter Bar -->
     <form action="{{ url_for('blog.index') }}" method="GET" class="row g-2 justify-content-center max-width-600 mx-auto mb-4">
       <div class="col-md-8">
-        <input type="text" name="q" class="form-control form-control-lg bg-dark text-white border-secondary" placeholder="Search topics (e.g. ATS, Action Verbs, Software Engineer)..." value="{{ search_query }}">
+        <input type="text" name="q" class="form-control form-control-lg bg-white text-dark border-secondary-subtle shadow-sm" placeholder="Search topics (e.g. ATS, Action Verbs, Software Engineer)..." value="{{ search_query }}">
       </div>
       <div class="col-md-4 d-flex gap-2">
-        <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold">Search</button>
+        <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold shadow-sm">Search</button>
         {% if search_query or selected_category %}
           <a href="{{ url_for('blog.index') }}" class="btn btn-outline-secondary btn-lg">Reset</a>
         {% endif %}
@@ -29,11 +29,11 @@
     <!-- Category Chips -->
     {% if categories %}
       <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
-        <a href="{{ url_for('blog.index') }}" class="btn btn-sm {% if not selected_category %}btn-light{% else %}btn-outline-light{% endif %} rounded-pill px-3">
+        <a href="{{ url_for('blog.index') }}" class="btn btn-sm {% if not selected_category %}btn-dark{% else %}btn-outline-dark{% endif %} rounded-pill px-3 fw-semibold">
           All Topics
         </a>
         {% for cat in categories %}
-          <a href="{{ url_for('blog.index', category=cat) }}" class="btn btn-sm {% if selected_category == cat %}btn-light{% else %}btn-outline-light{% endif %} rounded-pill px-3">
+          <a href="{{ url_for('blog.index', category=cat) }}" class="btn btn-sm {% if selected_category == cat %}btn-dark{% else %}btn-outline-dark{% endif %} rounded-pill px-3 fw-semibold">
             {{ cat }}
           </a>
         {% endfor %}
@@ -44,28 +44,28 @@
 
 <!-- Featured Article Banner -->
 {% if featured_post %}
-<div class="card bg-dark border-secondary text-white mb-5 shadow-lg overflow-hidden position-relative" style="border-radius: 16px;">
+<div class="card bg-white border-0 text-dark mb-5 shadow-lg overflow-hidden position-relative" style="border-radius: 20px; border: 1px solid rgba(148, 163, 184, 0.2) !important;">
   <div class="card-body p-4 p-lg-5 position-relative z-1">
     <div class="d-flex align-items-center gap-2 mb-3">
-      <span class="badge bg-primary px-3 py-2 rounded-pill">{{ featured_post.category }}</span>
-      <span class="text-light text-opacity-75 small">Featured Guide</span>
-      <span class="text-light text-opacity-50 small">• {{ featured_post.read_time }}</span>
+      <span class="badge bg-primary px-3 py-2 rounded-pill fw-bold">{{ featured_post.category }}</span>
+      <span class="text-secondary small fw-semibold">Featured Guide</span>
+      <span class="text-muted small">• {{ featured_post.read_time }}</span>
     </div>
-    <h2 class="h1 fw-bold text-white mb-3">
-      <a href="{{ url_for('blog.detail', slug=featured_post.slug) }}" class="text-white text-decoration-none hover-underline">
+    <h2 class="h1 fw-bold mb-3">
+      <a href="{{ url_for('blog.detail', slug=featured_post.slug) }}" class="text-dark text-decoration-none hover-underline" style="color: #0f172a !important;">
         {{ featured_post.title }}
       </a>
     </h2>
-    <p class="card-text text-light text-opacity-75 fs-5 mb-4" style="max-width: 850px;">
+    <p class="card-text text-secondary fs-5 mb-4" style="max-width: 850px; color: #475569 !important;">
       {{ featured_post.summary }}
     </p>
     <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-      <div class="d-flex align-items-center gap-2 text-light text-opacity-75 small">
-        <span>By {{ featured_post.author }}</span>
+      <div class="d-flex align-items-center gap-2 text-secondary small">
+        <span>By <strong>{{ featured_post.author }}</strong></span>
         <span>•</span>
         <span>{{ featured_post.created_at.strftime('%B %d, %Y') if featured_post.created_at }}</span>
       </div>
-      <a href="{{ url_for('blog.detail', slug=featured_post.slug) }}" class="btn btn-primary btn-lg px-4 fw-bold rounded-pill">
+      <a href="{{ url_for('blog.detail', slug=featured_post.slug) }}" class="btn btn-primary btn-lg px-4 fw-bold rounded-pill shadow-sm">
         Read Full Guide &rarr;
       </a>
     </div>
@@ -78,23 +78,23 @@
 <div class="row g-4 mb-5">
   {% for post in posts %}
   <div class="col-md-6 col-lg-4">
-    <div class="card h-100 bg-dark border-secondary text-white shadow-sm d-flex flex-column" style="border-radius: 12px; transition: transform 0.2s ease, border-color 0.2s ease;">
+    <div class="card h-100 bg-white border-0 shadow-sm d-flex flex-column" style="border-radius: 16px; border: 1px solid rgba(148, 163, 184, 0.2) !important; transition: transform 0.2s ease, box-shadow 0.2s ease;">
       <div class="card-body d-flex flex-column p-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
-          <span class="badge bg-secondary bg-opacity-50 text-light px-2.5 py-1 rounded-pill small">{{ post.category }}</span>
-          <small class="text-light text-opacity-50">{{ post.read_time }}</small>
+          <span class="badge bg-primary bg-opacity-10 text-primary px-2.5 py-1 rounded-pill small fw-bold">{{ post.category }}</span>
+          <small class="text-muted">{{ post.read_time }}</small>
         </div>
-        <h3 class="h5 fw-bold text-white mb-2">
-          <a href="{{ url_for('blog.detail', slug=post.slug) }}" class="text-white text-decoration-none">
+        <h3 class="h5 fw-bold mb-2">
+          <a href="{{ url_for('blog.detail', slug=post.slug) }}" class="text-dark text-decoration-none" style="color: #0f172a !important;">
             {{ post.title }}
           </a>
         </h3>
-        <p class="text-light text-opacity-75 small mb-4 flex-grow-1">
+        <p class="text-secondary small mb-4 flex-grow-1" style="color: #64748b !important;">
           {{ post.summary }}
         </p>
-        <div class="pt-3 border-top border-secondary d-flex justify-content-between align-items-center">
-          <small class="text-light text-opacity-50">By {{ post.author }}</small>
-          <a href="{{ url_for('blog.detail', slug=post.slug) }}" class="text-primary fw-semibold text-decoration-none small">
+        <div class="pt-3 border-top border-light-subtle d-flex justify-content-between align-items-center">
+          <small class="text-muted">By {{ post.author }}</small>
+          <a href="{{ url_for('blog.detail', slug=post.slug) }}" class="text-primary fw-bold text-decoration-none small">
             Read More &rarr;
           </a>
         </div>
@@ -105,14 +105,14 @@
 </div>
 {% else %}
 <div class="text-center py-5">
-  <h3 class="text-light">No articles found matching your criteria.</h3>
-  <p class="text-light text-opacity-50 mb-4">Try searching for broader keywords like "ATS", "Resume", or "Skills".</p>
-  <a href="{{ url_for('blog.index') }}" class="btn btn-outline-light">View All Articles</a>
+  <h3 class="text-dark">No articles found matching your criteria.</h3>
+  <p class="text-secondary mb-4">Try searching for broader keywords like "ATS", "Resume", or "Skills".</p>
+  <a href="{{ url_for('blog.index') }}" class="btn btn-outline-dark">View All Articles</a>
 </div>
 {% endif %}
 
 <!-- CTA Banner -->
-<div class="card bg-primary text-white p-4 p-lg-5 text-center shadow-lg border-0 my-5" style="border-radius: 16px;">
+<div class="card bg-primary text-white p-4 p-lg-5 text-center shadow-lg border-0 my-5" style="border-radius: 20px;">
   <div class="max-width-700 mx-auto">
     <h2 class="fw-extrabold mb-3">Want to check your resume's ATS match score?</h2>
     <p class="fs-5 mb-4 text-white text-opacity-90">
