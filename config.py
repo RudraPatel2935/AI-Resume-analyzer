@@ -9,6 +9,8 @@ def _is_production_environment():
 def _build_database_uri(base_dir):
     database_url = os.environ.get("DATABASE_URL")
     if database_url:
+        if database_url.startswith("postgres://"):
+            database_url = database_url.replace("postgres://", "postgresql://", 1)
         return database_url
 
     cloud_sql_connection_name = os.environ.get("CLOUD_SQL_CONNECTION_NAME")

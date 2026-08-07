@@ -8,6 +8,6 @@ login_manager = LoginManager()
 
 def init_database(app):
     with app.app_context():
-        from models import analysis, resume, user  # noqa: F401
+        from models import analysis, blog, resume, user  # noqa: F401
 
         db.create_all()

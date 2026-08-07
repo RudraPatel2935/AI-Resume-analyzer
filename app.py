@@ -6,6 +6,8 @@ from database.db import db, login_manager, init_database
 from routes.auth import auth_bp
 from routes.resume import resume_bp
 from routes.analysis import analysis_bp
+from routes.blog import blog_bp
+from database.seed_blogs import seed_default_blog_posts
 from models.user import User
 
 
@@ -17,6 +19,9 @@ def create_app():
     login_manager.init_app(app)
     init_database(app)
 
+    with app.app_context():
+        seed_default_blog_posts()
+
     login_manager.login_view = "auth.login"
 
     @login_manager.user_loader
@@ -26,6 +31,7 @@ def create_app():
     app.register_blueprint(auth_bp)
     app.register_blueprint(resume_bp)
     app.register_blueprint(analysis_bp)
+    app.register_blueprint(blog_bp)
 
     @app.route("/")
     def index():
