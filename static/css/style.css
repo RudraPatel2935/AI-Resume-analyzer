@@ -732,3 +732,28 @@ body {
 .theme-toggle-btn:hover {
   background: rgba(255, 255, 255, 0.22);
 }
+
+/* Dashboard & Form Dark Mode Overrides */
+[data-theme="dark"] .form-label {
+  color: #f8fafc !important;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .insight-item {
+  background: #1f2937 !important;
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .insight-item span {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .insight-item strong {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] input[type="file"]::file-selector-button {
+  background-color: #374151 !important;
+  color: #ffffff !important;
+  border-color: #4b5563 !important;
+}
