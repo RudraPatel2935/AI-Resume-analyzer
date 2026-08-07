@@ -639,3 +639,96 @@ body {
   background-color: #0f172a !important;
   color: #ffffff !important;
 }
+
+/* ==========================================================================
+   Dark / Light Theme Switcher Overrides
+   ========================================================================== */
+[data-theme="dark"] body {
+  background: linear-gradient(180deg, #090d16 0%, #0f172a 100%) !important;
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .hero-title,
+[data-theme="dark"] .section-title,
+[data-theme="dark"] .footer-title,
+[data-theme="dark"] .panel-title,
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .hero-copy,
+[data-theme="dark"] .text-secondary,
+[data-theme="dark"] .footer-subtitle,
+[data-theme="dark"] .footer-meta,
+[data-theme="dark"] .stat-label,
+[data-theme="dark"] .mini-card p {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .card,
+[data-theme="dark"] .mini-card,
+[data-theme="dark"] .panel-card,
+[data-theme="dark"] .stat-card,
+[data-theme="dark"] .auth-panel-form,
+[data-theme="dark"] .footer-card {
+  background: #111827 !important;
+  color: #f8fafc !important;
+  border-color: #1f2937 !important;
+}
+
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .soft-input {
+  background-color: #1f2937 !important;
+  color: #ffffff !important;
+  border-color: #374151 !important;
+}
+
+[data-theme="dark"] .form-control::placeholder {
+  color: #9ca3af !important;
+}
+
+[data-theme="dark"] .table-modern thead th {
+  color: #94a3b8 !important;
+  border-bottom-color: #374151 !important;
+}
+
+[data-theme="dark"] .table-modern tbody td {
+  border-top-color: #1f2937 !important;
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .footer-card .btn-outline-dark,
+[data-theme="dark"] .btn-outline-dark {
+  color: #f8fafc !important;
+  border-color: #475569 !important;
+}
+
+[data-theme="dark"] .footer-card .btn-outline-dark:hover,
+[data-theme="dark"] .btn-outline-dark:hover {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+.theme-toggle-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
