@@ -599,3 +599,43 @@ body {
 .progress-bar {
   background: linear-gradient(90deg, #0ea5e9, #22c55e);
 }
+
+/* Global Blog & High Contrast Overrides */
+.blog-title, h1, h2, h3, h4, h5, h6 {
+  color: #0f172a;
+}
+
+.text-dark {
+  color: #0f172a !important;
+}
+
+.text-secondary {
+  color: #475569 !important;
+}
+
+.text-muted {
+  color: #64748b !important;
+}
+
+.breadcrumb-item a {
+  color: #475569 !important;
+}
+
+.breadcrumb-item.active {
+  color: #0284c7 !important;
+}
+
+.form-control::placeholder {
+  color: #64748b !important;
+  opacity: 1;
+}
+
+.footer-card .btn-outline-dark {
+  color: #0f172a !important;
+  border-color: #0f172a !important;
+}
+
+.footer-card .btn-outline-dark:hover {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+}
