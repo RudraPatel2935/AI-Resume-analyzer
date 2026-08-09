@@ -41,12 +41,12 @@
         {% if current_user.is_authenticated %}
         <form action="{{ url_for('resume.upload_resume') }}" method="post" enctype="multipart/form-data" class="mt-4">
           <div class="upload-zone mb-3">
-            <label class="form-label text-white-50">Resume file</label>
+            <label class="form-label">Resume file</label>
             <input type="file" name="resume_file" class="form-control form-control-lg soft-input" accept=".pdf,.docx"
               required>
           </div>
           <div class="mb-3">
-            <label class="form-label text-white-50">Target job description</label>
+            <label class="form-label">Target job description</label>
             <textarea name="job_description" class="form-control soft-input" rows="8"
               placeholder="Paste the target role description here..." required></textarea>
           </div>
@@ -54,7 +54,7 @@
         </form>
         {% else %}
         <div class="auth-callout mt-4">
-          <p class="mb-3 text-white-75">Create an account or sign in to unlock secure uploads, history tracking, and
+          <p class="mb-3 text-secondary">Create an account or sign in to unlock secure uploads, history tracking, and
             detailed results.</p>
           <div class="d-flex gap-2 flex-wrap">
             <a class="btn btn-accent" href="{{ url_for('auth.register') }}">Get Started</a>
