@@ -843,3 +843,107 @@ h6 {
 [data-theme="light"] .insight-item strong {
   color: #0f172a !important;
 }
+
+/* ==========================================================================
+   ALWAYS-DARK ELEMENTS — text must stay WHITE in BOTH light & dark mode
+   These elements have a permanently dark/black background by design.
+   The light-mode global h1-h6 override (#0f172a) was winning → camouflage.
+   ========================================================================== */
+
+/* --- feature-panel (dark gradient card on home page upload section) --- */
+.feature-panel,
+[data-theme="light"] .feature-panel,
+[data-theme="dark"]  .feature-panel {
+  color: #fff !important;
+}
+
+[data-theme="light"] .feature-panel .panel-kicker,
+[data-theme="light"] .feature-panel .panel-title,
+[data-theme="light"] .feature-panel h1,
+[data-theme="light"] .feature-panel h2,
+[data-theme="light"] .feature-panel h3,
+[data-theme="light"] .feature-panel h4,
+[data-theme="light"] .feature-panel h5,
+[data-theme="light"] .feature-panel h6,
+[data-theme="light"] .feature-panel .form-label,
+[data-theme="light"] .feature-panel .text-secondary,
+[data-theme="light"] .feature-panel .section-title {
+  color: #ffffff !important;
+}
+
+/* --- auth-panel-copy (dark gradient left panel on login / register) --- */
+[data-theme="light"] .auth-panel-copy,
+[data-theme="light"] .auth-panel-copy .hero-title,
+[data-theme="light"] .auth-panel-copy h1,
+[data-theme="light"] .auth-panel-copy h2,
+[data-theme="light"] .auth-panel-copy h3,
+[data-theme="light"] .auth-panel-copy h4,
+[data-theme="light"] .auth-panel-copy h5,
+[data-theme="light"] .auth-panel-copy h6 {
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .auth-panel-copy .hero-copy,
+[data-theme="light"] .auth-panel-copy .eyebrow,
+[data-theme="light"] .auth-panel-copy .text-secondary {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
+[data-theme="light"] .auth-panel-copy .auth-benefits div {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+/* --- feature-panel form elements (file input / textarea labels) --- */
+[data-theme="light"] .feature-panel .form-control,
+[data-theme="light"] .feature-panel .soft-input {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+[data-theme="light"] .feature-panel .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+[data-theme="light"] .feature-panel input[type="file"]::file-selector-button {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* --- status-pill inside feature-panel is already light green, keep it --- */
+
+/* --- auth-panel-copy in dark mode (already white, but re-confirm) --- */
+[data-theme="dark"] .auth-panel-copy,
+[data-theme="dark"] .auth-panel-copy .hero-title,
+[data-theme="dark"] .auth-panel-copy h1,
+[data-theme="dark"] .auth-panel-copy h2 {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .auth-panel-copy .hero-copy,
+[data-theme="dark"] .auth-panel-copy .eyebrow {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
+[data-theme="dark"] .auth-panel-copy .auth-benefits div {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+/* --- feature-panel dark mode form elements --- */
+[data-theme="dark"] .feature-panel .form-control,
+[data-theme="dark"] .feature-panel .soft-input {
+  background-color: rgba(255, 255, 255, 0.10) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.20) !important;
+}
+
+[data-theme="dark"] .feature-panel .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.45) !important;
+}
+
+[data-theme="dark"] .feature-panel input[type="file"]::file-selector-button {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.20) !important;
+}
