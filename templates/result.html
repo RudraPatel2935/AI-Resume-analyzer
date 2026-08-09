@@ -69,16 +69,16 @@
           {% set missing_skills = analysis.missing_skills.split(', ') if analysis.missing_skills else [] %}
           <div class="skill-chip-wrap mb-3">
             {% for skill in matched_skills %}
-              <span class="skill-chip success">{{ skill }}</span>
+            <span class="skill-chip success">{{ skill }}</span>
             {% else %}
-              <span class="text-muted">No matched skills detected</span>
+            <span class="text-muted">No matched skills detected</span>
             {% endfor %}
           </div>
           <div class="skill-chip-wrap">
             {% for skill in missing_skills %}
-              <span class="skill-chip warning">{{ skill }}</span>
+            <span class="skill-chip warning">{{ skill }}</span>
             {% else %}
-              <span class="text-muted">No missing skills detected</span>
+            <span class="text-muted">No missing skills detected</span>
             {% endfor %}
           </div>
         </div>
@@ -95,9 +95,9 @@
       </div>
       <div class="question-stack">
         {% for question in interview_questions %}
-          <div class="question-item">{{ question }}</div>
+        <div class="question-item">{{ question }}</div>
         {% else %}
-          <div class="text-muted">Questions will appear after analysis.</div>
+        <div class="text-muted">Questions will appear after analysis.</div>
         {% endfor %}
       </div>
     </div>
