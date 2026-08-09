@@ -21,7 +21,7 @@
         <div class="score-badge">{{ analysis.ats_score }}%</div>
       </div>
       <div class="progress modern-progress mb-4">
-        <div class="progress-bar" style="width: {{ analysis.ats_score }}%"></div>
+        <div class="progress-bar" id="atsProgressBar" data-width="{{ analysis.ats_score }}"></div>
       </div>
       <div class="row g-3">
         <div class="col-md-4">
@@ -109,11 +109,14 @@
           <h2 class="panel-title mb-0">ATS breakdown</h2>
         </div>
       </div>
-      <canvas id="atsChart" height="250"></canvas>
+      <canvas id="atsChart" height="250" data-score="{{ analysis.ats_score }}"></canvas>
     </div>
   </div>
 </div>
 <script>
-  window.aiCareerStats = {{ analysis.ats_score | tojson }};
+  var chart = document.getElementById('atsChart');
+  window.aiCareerStats = chart ? parseInt(chart.dataset.score, 10) : 0;
+  var bar = document.getElementById('atsProgressBar');
+  if (bar) { bar.style.width = bar.dataset.width + '%'; }
 </script>
 {% endblock %}

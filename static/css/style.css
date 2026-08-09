@@ -853,7 +853,7 @@ h6 {
 /* --- feature-panel (dark gradient card on home page upload section) --- */
 .feature-panel,
 [data-theme="light"] .feature-panel,
-[data-theme="dark"]  .feature-panel {
+[data-theme="dark"] .feature-panel {
   color: #fff !important;
 }
 
@@ -946,4 +946,252 @@ h6 {
   background-color: rgba(255, 255, 255, 0.12) !important;
   color: #ffffff !important;
   border-color: rgba(255, 255, 255, 0.20) !important;
+}
+
+/* ==========================================================================
+   BLOG PAGES — Dark & Light Mode Contrast Fixes
+   (blog/index.html + blog/post.html)
+   ========================================================================== */
+
+/* --- Blog cards: bg-white hardcoded → override in dark mode --- */
+[data-theme="dark"] .card.bg-white,
+[data-theme="dark"] .card[style*="bg-white"] {
+  background-color: #111827 !important;
+  border-color: #1f2937 !important;
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .card.bg-white .text-dark,
+[data-theme="dark"] .card.bg-white h3,
+[data-theme="dark"] .card.bg-white h4,
+[data-theme="dark"] .card.bg-white a.text-dark {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .card.bg-white .text-secondary,
+[data-theme="dark"] .card.bg-white .text-muted,
+[data-theme="dark"] .card.bg-white small {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .card.bg-white .border-top,
+[data-theme="dark"] .card.bg-white .pt-3 {
+  border-color: #374151 !important;
+}
+
+/* --- btn-outline-dark: dark border + dark text on dark bg → camouflage --- */
+[data-theme="dark"] .btn-outline-dark {
+  color: #f8fafc !important;
+  border-color: #475569 !important;
+  background: transparent !important;
+}
+
+[data-theme="dark"] .btn-outline-dark:hover {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+/* btn-dark in dark mode should remain readable */
+[data-theme="dark"] .btn-dark {
+  background-color: #374151 !important;
+  border-color: #4b5563 !important;
+  color: #f8fafc !important;
+}
+
+/* --- Blog search input (bg-white text-dark hardcoded) --- */
+[data-theme="dark"] input.bg-white,
+[data-theme="dark"] .form-control.bg-white {
+  background-color: #1f2937 !important;
+  color: #f8fafc !important;
+  border-color: #374151 !important;
+}
+
+[data-theme="dark"] input.bg-white::placeholder,
+[data-theme="dark"] .form-control.bg-white::placeholder {
+  color: #9ca3af !important;
+}
+
+/* --- CTA banner: bg-primary with h2 (light mode overrides were making h2 dark) --- */
+.card.bg-primary h2,
+.card.bg-primary h3,
+[data-theme="light"] .card.bg-primary h2,
+[data-theme="light"] .card.bg-primary h3,
+[data-theme="dark"]  .card.bg-primary h2,
+[data-theme="dark"]  .card.bg-primary h3 {
+  color: #ffffff !important;
+}
+
+/* --- Blog featured card: bg-white border-0 text-dark --- */
+[data-theme="dark"] .card.border-0.text-dark {
+  background-color: #111827 !important;
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .card.border-0.text-dark h2,
+[data-theme="dark"] .card.border-0.text-dark a.text-dark {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .card.border-0.text-dark .text-secondary {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .card.border-0.text-dark .text-muted {
+  color: #6b7280 !important;
+}
+
+/* --- "No articles found" empty state --- */
+[data-theme="dark"] .text-center .text-dark {
+  color: #f8fafc !important;
+}
+
+/* ==========================================================================
+   BLOG POST (post.html) — Dark Mode for .blog-content inline styles
+   The <style> block in post.html uses hardcoded light colors.
+   These overrides win via [data-theme] specificity.
+   ========================================================================== */
+
+[data-theme="dark"] .blog-content {
+  color: #d1d5db !important;
+}
+
+[data-theme="dark"] .blog-content h1,
+[data-theme="dark"] .blog-content h2,
+[data-theme="dark"] .blog-content h3,
+[data-theme="dark"] .blog-content h4 {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .blog-content p {
+  color: #d1d5db !important;
+}
+
+[data-theme="dark"] .blog-content ul,
+[data-theme="dark"] .blog-content ol,
+[data-theme="dark"] .blog-content li {
+  color: #d1d5db !important;
+}
+
+[data-theme="dark"] .blog-content blockquote {
+  background: rgba(14, 165, 233, 0.10) !important;
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .blog-content code {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #7dd3fc !important;
+}
+
+/* pre block is already always dark — pre code is already white ✅ */
+
+[data-theme="dark"] .blog-content table {
+  background: #1f2937 !important;
+  border-color: #374151 !important;
+}
+
+[data-theme="dark"] .blog-content th {
+  background: #111827 !important;
+  color: #f8fafc !important;
+  border-color: #374151 !important;
+}
+
+[data-theme="dark"] .blog-content td {
+  color: #d1d5db !important;
+  border-color: #374151 !important;
+}
+
+/* --- Post CTA card: bg-white border-primary text-dark --- */
+[data-theme="dark"] #cta-section.card {
+  background-color: #111827 !important;
+  border-color: #3b82f6 !important;
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] #cta-section h3,
+[data-theme="dark"] #cta-section .text-dark {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] #cta-section .text-secondary {
+  color: #94a3b8 !important;
+}
+
+/* --- Related articles cards (bg-white) --- */
+[data-theme="dark"] .pt-4 .card.bg-white {
+  background: #111827 !important;
+  border-color: #1f2937 !important;
+}
+
+[data-theme="dark"] .pt-4 .card.bg-white a.text-dark {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .pt-4 .card.bg-white .text-muted {
+  color: #9ca3af !important;
+}
+
+/* --- Breadcrumb contrast --- */
+[data-theme="dark"] .breadcrumb-item a {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .breadcrumb-item + .breadcrumb-item::before {
+  color: #6b7280 !important;
+}
+
+/* --- Author / date meta text in post header --- */
+[data-theme="dark"] .blog-content + div .text-secondary,
+[data-theme="dark"] .text-secondary.small {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] strong.text-dark {
+  color: #f8fafc !important;
+}
+
+/* ==========================================================================
+   LIGHT MODE — Blog specific fixes
+   ========================================================================== */
+
+/* btn-outline-dark on light bg is fine, but confirm readable */
+[data-theme="light"] .btn-outline-dark {
+  color: #0f172a !important;
+  border-color: #0f172a !important;
+}
+
+[data-theme="light"] .btn-outline-dark:hover {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+}
+
+/* Blog content on light mode */
+[data-theme="light"] .blog-content {
+  color: #334155 !important;
+}
+
+[data-theme="light"] .blog-content h1,
+[data-theme="light"] .blog-content h2,
+[data-theme="light"] .blog-content h3,
+[data-theme="light"] .blog-content h4 {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .blog-content p,
+[data-theme="light"] .blog-content ul,
+[data-theme="light"] .blog-content ol,
+[data-theme="light"] .blog-content li {
+  color: #334155 !important;
+}
+
+[data-theme="light"] .blog-content table {
+  background: #ffffff !important;
+}
+
+[data-theme="light"] .blog-content th {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .blog-content td {
+  color: #334155 !important;
 }
