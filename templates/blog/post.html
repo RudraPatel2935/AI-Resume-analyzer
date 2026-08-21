@@ -1,181 +1,339 @@
 {% extends "base.html" %}
 
-{% block title %}{{ post.meta_title or post.title }} | AI Resume Platform{% endblock %}
+{% block title %}
+{{ post.meta_title or post.title }} | AI Resume Platform
+{% endblock %}
+
 
 {% block content %}
-<!-- Custom SEO Head Tags Injection -->
+
+<!-- =========================
+     SEO STRUCTURED DATA
+========================= -->
+
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "{{ post.title }}",
-  "description": "{{ post.meta_description or post.summary }}",
-  "author": {
-    "@type": "Organization",
-    "name": "{{ post.author }}"
-  },
-  "datePublished": "{{ post.created_at.isoformat() if post.created_at else '' }}",
-  "dateModified": "{{ post.updated_at.isoformat() if post.updated_at else '' }}",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "{{ request.url }}"
-  }
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "{{ post.title }}",
+    "description": "{{ post.meta_description or post.summary }}",
+    "author": {
+        "@type": "Organization",
+        "name": "{{ post.author }}"
+    },
+    "datePublished": "{{ post.created_at.isoformat() if post.created_at else '' }}",
+    "dateModified": "{{ post.updated_at.isoformat() if post.updated_at else '' }}",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ request.url }}"
+    }
 }
 </script>
 
+
 <div class="row">
-  <div class="col-lg-8 mx-auto">
-    <!-- Breadcrumb -->
-    <nav aria-label="breadcrumb" class="mb-4">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ url_for('index') }}" class="text-secondary text-decoration-none fw-semibold">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{ url_for('blog.index') }}" class="text-secondary text-decoration-none fw-semibold">Blog</a></li>
-        <li class="breadcrumb-item active text-primary fw-bold" aria-current="page">{{ post.category }}</li>
-      </ol>
-    </nav>
 
-    <!-- Post Header -->
-    <div class="mb-4 pb-4 border-bottom border-secondary-subtle">
-      <div class="d-flex align-items-center gap-2 mb-3">
-        <span class="badge bg-primary px-3 py-1.5 rounded-pill fw-bold">{{ post.category }}</span>
-        <span class="text-muted small">• {{ post.read_time }}</span>
-      </div>
-      <h1 class="display-5 fw-extrabold text-dark mb-3" style="color: #0f172a !important;">{{ post.title }}</h1>
-      <p class="lead text-secondary mb-4" style="color: #475569 !important;">{{ post.summary }}</p>
+    <div class="col-lg-8 mx-auto">
 
-      <div class="d-flex align-items-center justify-content-between text-secondary small">
-        <div class="d-flex align-items-center gap-2">
-          <span>By <strong class="text-dark">{{ post.author }}</strong></span>
-          <span>•</span>
-          <span>Published on {{ post.created_at.strftime('%B %d, %Y') if post.created_at }}</span>
+
+        <!-- =========================
+             BREADCRUMB
+        ========================= -->
+
+        <nav aria-label="breadcrumb" class="mb-4">
+
+            <ol class="breadcrumb">
+
+                <li class="breadcrumb-item">
+
+                    <a
+                        href="{{ url_for('index') }}"
+                        class="blog-breadcrumb-link text-decoration-none fw-semibold"
+                    >
+                        Home
+                    </a>
+
+                </li>
+
+
+                <li class="breadcrumb-item">
+
+                    <a
+                        href="{{ url_for('blog.index') }}"
+                        class="blog-breadcrumb-link text-decoration-none fw-semibold"
+                    >
+                        Blog
+                    </a>
+
+                </li>
+
+
+                <li
+                    class="breadcrumb-item active blog-breadcrumb-active fw-bold"
+                    aria-current="page"
+                >
+                    {{ post.category }}
+                </li>
+
+            </ol>
+
+        </nav>
+
+
+
+        <!-- =========================
+             POST HEADER
+        ========================= -->
+
+        <div class="blog-detail-header mb-4 pb-4">
+
+
+            <!-- Category + Read Time -->
+
+            <div class="d-flex align-items-center gap-2 mb-3">
+
+                <span class="badge bg-primary px-3 py-2 rounded-pill fw-bold">
+
+                    {{ post.category }}
+
+                </span>
+
+
+                <span class="blog-muted small">
+
+                    • {{ post.read_time }}
+
+                </span>
+
+            </div>
+
+
+
+            <!-- Blog Title -->
+
+            <h1 class="display-5 fw-extrabold blog-detail-title mb-3">
+
+                {{ post.title }}
+
+            </h1>
+
+
+
+            <!-- Summary -->
+
+            <p class="lead blog-detail-summary mb-4">
+
+                {{ post.summary }}
+
+            </p>
+
+
+
+            <!-- Author + Date -->
+
+            <div
+                class="d-flex align-items-center justify-content-between flex-wrap gap-3 blog-detail-meta small"
+            >
+
+                <div class="d-flex align-items-center gap-2">
+
+                    <span>
+
+                        By
+                        <strong class="blog-author">
+
+                            {{ post.author }}
+
+                        </strong>
+
+                    </span>
+
+
+                    <span>•</span>
+
+
+                    <span>
+
+                        Published on
+                        {{ post.created_at.strftime('%B %d, %Y') if post.created_at }}
+
+                    </span>
+
+                </div>
+
+
+
+                <!-- CTA Button -->
+
+                <div>
+
+                    <a
+                        href="#cta-section"
+                        class="btn btn-sm btn-outline-primary rounded-pill fw-bold"
+                    >
+                        Analyze Resume
+                    </a>
+
+                </div>
+
+            </div>
+
         </div>
-        <div>
-          <a href="#cta-section" class="btn btn-sm btn-outline-primary rounded-pill fw-bold">Analyze Resume</a>
+
+
+
+        <!-- =========================
+             ARTICLE CONTENT
+        ========================= -->
+
+        <article class="blog-content mb-5 fs-5">
+
+            {{ content_html | safe }}
+
+        </article>
+
+
+
+        <!-- =========================
+             CTA SECTION
+        ========================= -->
+
+        <div
+            id="cta-section"
+            class="blog-detail-cta p-4 p-lg-5 mb-5 shadow-lg"
+        >
+
+            <div class="row align-items-center">
+
+
+                <div class="col-lg-8 mb-3 mb-lg-0">
+
+
+                    <span
+                        class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill small mb-2 fw-bold"
+                    >
+                        Free AI Tool
+                    </span>
+
+
+                    <h3 class="fw-bold mb-2 blog-cta-title">
+
+                        Ready to test your resume against ATS screeners?
+
+                    </h3>
+
+
+                    <p class="blog-cta-description mb-0">
+
+                        Upload your PDF or Word resume to get an instant match
+                        score, missing skill report, and action verb feedback.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="col-lg-4 text-lg-end">
+
+                    <a
+                        href="{{ url_for('index') }}"
+                        class="btn btn-primary btn-lg fw-bold rounded-pill px-4 shadow-sm"
+                    >
+                        Upload Resume Free &rarr;
+                    </a>
+
+                </div>
+
+
+            </div>
+
         </div>
-      </div>
+
+
+
+        <!-- =========================
+             RELATED POSTS
+        ========================= -->
+
+        {% if recent_posts %}
+
+        <div class="related-posts-section pt-4">
+
+
+            <h3 class="h4 fw-bold related-posts-title mb-4">
+
+                Related Articles & Guides
+
+            </h3>
+
+
+
+            <div class="row g-3">
+
+
+                {% for rpost in recent_posts %}
+
+                <div class="col-md-4">
+
+
+                    <div class="card related-post-card h-100 shadow-sm p-3">
+
+
+                        <!-- Category -->
+
+                        <span
+                            class="badge bg-primary bg-opacity-10 text-primary px-2 py-1 rounded-pill small mb-2 text-self-start fw-bold"
+                        >
+
+                            {{ rpost.category }}
+
+                        </span>
+
+
+
+                        <!-- Title -->
+
+                        <h4 class="h6 fw-bold mb-2">
+
+                            <a
+                                href="{{ url_for('blog.detail', slug=rpost.slug) }}"
+                                class="blog-post-title text-decoration-none"
+                            >
+
+                                {{ rpost.title }}
+
+                            </a>
+
+                        </h4>
+
+
+
+                        <!-- Read Time -->
+
+                        <small class="blog-muted mt-auto">
+
+                            {{ rpost.read_time }}
+
+                        </small>
+
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+
     </div>
 
-    <!-- Article Content -->
-    <article class="blog-content text-dark mb-5 fs-5">
-      {{ content_html | safe }}
-    </article>
-
-    <!-- Mid-article or Bottom CTA Box -->
-    <div id="cta-section" class="card bg-white border-primary text-dark p-4 p-lg-5 mb-5 shadow-lg" style="border-radius: 20px; border-width: 2px !important;">
-      <div class="row align-items-center">
-        <div class="col-lg-8 mb-3 mb-lg-0">
-          <span class="badge bg-primary bg-opacity-10 text-primary px-2.5 py-1 rounded-pill small mb-2 fw-bold">Free AI Tool</span>
-          <h3 class="fw-bold mb-2 text-dark" style="color: #0f172a !important;">Ready to test your resume against ATS screeners?</h3>
-          <p class="text-secondary mb-0" style="color: #475569 !important;">
-            Upload your PDF or Word resume to get an instant match score, missing skill report, and action verb feedback.
-          </p>
-        </div>
-        <div class="col-lg-4 text-lg-end">
-          <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg fw-bold rounded-pill px-4 shadow-sm">
-            Upload Resume Free &rarr;
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Recent Posts Section -->
-    {% if recent_posts %}
-    <div class="pt-4 border-top border-secondary-subtle">
-      <h3 class="h4 fw-bold text-dark mb-4" style="color: #0f172a !important;">Related Articles & Guides</h3>
-      <div class="row g-3">
-        {% for rpost in recent_posts %}
-        <div class="col-md-4">
-          <div class="card h-100 bg-white border-0 shadow-sm p-3" style="border-radius: 12px; border: 1px solid rgba(148, 163, 184, 0.2) !important;">
-            <span class="badge bg-primary bg-opacity-10 text-primary px-2 py-1 rounded-pill small mb-2 text-self-start fw-bold">{{ rpost.category }}</span>
-            <h4 class="h6 fw-bold mb-2">
-              <a href="{{ url_for('blog.detail', slug=rpost.slug) }}" class="text-dark text-decoration-none hover-underline" style="color: #0f172a !important;">
-                {{ rpost.title }}
-              </a>
-            </h4>
-            <small class="text-muted mt-auto">{{ rpost.read_time }}</small>
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
-
-  </div>
 </div>
 
-<style>
-.blog-content {
-  line-height: 1.8;
-  color: #334155;
-}
-.blog-content h1, .blog-content h2, .blog-content h3, .blog-content h4 {
-  color: #0f172a !important;
-  font-weight: 800;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-}
-.blog-content p {
-  color: #334155 !important;
-  margin-bottom: 1.4rem;
-}
-.blog-content ul, .blog-content ol {
-  margin-bottom: 1.5rem;
-  padding-left: 1.5rem;
-  color: #334155 !important;
-}
-.blog-content li {
-  margin-bottom: 0.5rem;
-}
-.blog-content blockquote {
-  border-left: 4px solid #0ea5e9;
-  padding: 1rem 1.5rem;
-  background: rgba(14, 165, 233, 0.06);
-  border-radius: 0 12px 12px 0;
-  margin: 1.5rem 0;
-  font-style: italic;
-  color: #0f172a;
-}
-.blog-content code {
-  background: rgba(15, 23, 42, 0.08);
-  color: #0284c7;
-  padding: 0.2rem 0.4rem;
-  border-radius: 4px;
-  font-size: 0.9em;
-  font-weight: 600;
-}
-.blog-content pre {
-  background: #0f172a;
-  padding: 1.25rem;
-  border-radius: 12px;
-  border: 1px solid #1e293b;
-  overflow-x: auto;
-  margin: 1.5rem 0;
-}
-.blog-content pre code {
-  background: transparent;
-  padding: 0;
-  color: #f8fafc;
-  font-weight: normal;
-}
-.blog-content table {
-  width: 100%;
-  margin: 1.5rem 0;
-  border-collapse: collapse;
-  background: #ffffff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-}
-.blog-content th, .blog-content td {
-  padding: 0.85rem 1rem;
-  border: 1px solid #e2e8f0;
-  color: #334155;
-  font-size: 0.95rem;
-}
-.blog-content th {
-  background: #f1f5f9;
-  color: #0f172a;
-  font-weight: 700;
-}
-</style>
 {% endblock %}

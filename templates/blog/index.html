@@ -3,124 +3,369 @@
 {% block title %}AI Resume & Career Blog | Tips, Guides & ATS Strategies{% endblock %}
 
 {% block content %}
+
+<!-- =========================
+     BLOG HERO
+========================= -->
+
 <div class="row mb-4">
-  <div class="col-lg-10 mx-auto text-center">
-    <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill fw-bold mb-3 border border-primary border-opacity-25">
-      📚 AI Career & Resume Intelligence Blog
-    </span>
-    <h1 class="display-5 fw-extrabold text-dark mb-3 hero-title" style="color: #0f172a !important;">Master Your Resume & Beat ATS Algorithms</h1>
-    <p class="lead text-secondary mb-4" style="color: #475569 !important;">
-      Expert career guides, action verb strategies, and step-by-step tips to optimize your resume for Google, LinkedIn, and corporate ATS screeners.
-    </p>
+    <div class="col-lg-10 mx-auto text-center">
 
-    <!-- Search & Filter Bar -->
-    <form action="{{ url_for('blog.index') }}" method="GET" class="row g-2 justify-content-center max-width-600 mx-auto mb-4">
-      <div class="col-md-8">
-        <input type="text" name="q" class="form-control form-control-lg bg-white text-dark border-secondary-subtle shadow-sm" placeholder="Search topics (e.g. ATS, Action Verbs, Software Engineer)..." value="{{ search_query }}">
-      </div>
-      <div class="col-md-4 d-flex gap-2">
-        <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold shadow-sm">Search</button>
-        {% if search_query or selected_category %}
-          <a href="{{ url_for('blog.index') }}" class="btn btn-outline-secondary btn-lg">Reset</a>
-        {% endif %}
-      </div>
-    </form>
+        <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill fw-bold mb-3 border border-primary border-opacity-25">
+            📚 AI Career & Resume Intelligence Blog
+        </span>
 
-    <!-- Category Chips -->
-    {% if categories %}
-      <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
-        <a href="{{ url_for('blog.index') }}" class="btn btn-sm {% if not selected_category %}btn-dark{% else %}btn-outline-dark{% endif %} rounded-pill px-3 fw-semibold">
-          All Topics
-        </a>
-        {% for cat in categories %}
-          <a href="{{ url_for('blog.index', category=cat) }}" class="btn btn-sm {% if selected_category == cat %}btn-dark{% else %}btn-outline-dark{% endif %} rounded-pill px-3 fw-semibold">
-            {{ cat }}
-          </a>
-        {% endfor %}
-      </div>
-    {% endif %}
-  </div>
-</div>
+        <h1 class="display-5 fw-extrabold mb-3 hero-title">
+            Master Your Resume & Beat ATS Algorithms
+        </h1>
 
-<!-- Featured Article Banner -->
-{% if featured_post %}
-<div class="card bg-white border-0 text-dark mb-5 shadow-lg overflow-hidden position-relative" style="border-radius: 20px; border: 1px solid rgba(148, 163, 184, 0.2) !important;">
-  <div class="card-body p-4 p-lg-5 position-relative z-1">
-    <div class="d-flex align-items-center gap-2 mb-3">
-      <span class="badge bg-primary px-3 py-2 rounded-pill fw-bold">{{ featured_post.category }}</span>
-      <span class="text-secondary small fw-semibold">Featured Guide</span>
-      <span class="text-muted small">• {{ featured_post.read_time }}</span>
-    </div>
-    <h2 class="h1 fw-bold mb-3">
-      <a href="{{ url_for('blog.detail', slug=featured_post.slug) }}" class="text-dark text-decoration-none hover-underline" style="color: #0f172a !important;">
-        {{ featured_post.title }}
-      </a>
-    </h2>
-    <p class="card-text text-secondary fs-5 mb-4" style="max-width: 850px; color: #475569 !important;">
-      {{ featured_post.summary }}
-    </p>
-    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-      <div class="d-flex align-items-center gap-2 text-secondary small">
-        <span>By <strong>{{ featured_post.author }}</strong></span>
-        <span>•</span>
-        <span>{{ featured_post.created_at.strftime('%B %d, %Y') if featured_post.created_at }}</span>
-      </div>
-      <a href="{{ url_for('blog.detail', slug=featured_post.slug) }}" class="btn btn-primary btn-lg px-4 fw-bold rounded-pill shadow-sm">
-        Read Full Guide &rarr;
-      </a>
-    </div>
-  </div>
-</div>
-{% endif %}
-
-<!-- Post Grid -->
-{% if posts %}
-<div class="row g-4 mb-5">
-  {% for post in posts %}
-  <div class="col-md-6 col-lg-4">
-    <div class="card h-100 bg-white border-0 shadow-sm d-flex flex-column" style="border-radius: 16px; border: 1px solid rgba(148, 163, 184, 0.2) !important; transition: transform 0.2s ease, box-shadow 0.2s ease;">
-      <div class="card-body d-flex flex-column p-4">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <span class="badge bg-primary bg-opacity-10 text-primary px-2.5 py-1 rounded-pill small fw-bold">{{ post.category }}</span>
-          <small class="text-muted">{{ post.read_time }}</small>
-        </div>
-        <h3 class="h5 fw-bold mb-2">
-          <a href="{{ url_for('blog.detail', slug=post.slug) }}" class="text-dark text-decoration-none" style="color: #0f172a !important;">
-            {{ post.title }}
-          </a>
-        </h3>
-        <p class="text-secondary small mb-4 flex-grow-1" style="color: #64748b !important;">
-          {{ post.summary }}
+        <p class="lead blog-hero-description mb-4">
+            Expert career guides, action verb strategies, and step-by-step tips to optimize your resume for Google, LinkedIn, and corporate ATS screeners.
         </p>
-        <div class="pt-3 border-top border-light-subtle d-flex justify-content-between align-items-center">
-          <small class="text-muted">By {{ post.author }}</small>
-          <a href="{{ url_for('blog.detail', slug=post.slug) }}" class="text-primary fw-bold text-decoration-none small">
-            Read More &rarr;
-          </a>
+
+
+        <!-- =========================
+             SEARCH BAR
+        ========================= -->
+
+        <form
+            action="{{ url_for('blog.index') }}"
+            method="GET"
+            class="row g-2 justify-content-center max-width-600 mx-auto mb-4"
+        >
+
+            <div class="col-md-8">
+
+                <input
+                    type="text"
+                    name="q"
+                    class="form-control form-control-lg blog-search shadow-sm"
+                    placeholder="Search topics (e.g. ATS, Action Verbs, Software Engineer)..."
+                    value="{{ search_query }}"
+                >
+
+            </div>
+
+            <div class="col-md-4 d-flex gap-2">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary btn-lg w-100 fw-bold shadow-sm"
+                >
+                    Search
+                </button>
+
+                {% if search_query or selected_category %}
+
+                    <a
+                        href="{{ url_for('blog.index') }}"
+                        class="btn btn-outline-secondary btn-lg"
+                    >
+                        Reset
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </form>
+
+
+        <!-- =========================
+             CATEGORY BUTTONS
+        ========================= -->
+
+        {% if categories %}
+
+        <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+
+            <!-- All Topics -->
+
+            <a
+                href="{{ url_for('blog.index') }}"
+                class="btn btn-sm category-btn {% if not selected_category %}active-category{% endif %} rounded-pill px-3 fw-semibold"
+            >
+                All Topics
+            </a>
+
+
+            <!-- Dynamic Categories -->
+
+            {% for cat in categories %}
+
+            <a
+                href="{{ url_for('blog.index', category=cat) }}"
+                class="btn btn-sm category-btn {% if selected_category == cat %}active-category{% endif %} rounded-pill px-3 fw-semibold"
+            >
+                {{ cat }}
+            </a>
+
+            {% endfor %}
+
         </div>
-      </div>
+
+        {% endif %}
+
     </div>
-  </div>
-  {% endfor %}
 </div>
-{% else %}
-<div class="text-center py-5">
-  <h3 class="text-dark">No articles found matching your criteria.</h3>
-  <p class="text-secondary mb-4">Try searching for broader keywords like "ATS", "Resume", or "Skills".</p>
-  <a href="{{ url_for('blog.index') }}" class="btn btn-outline-dark">View All Articles</a>
+
+
+
+<!-- =========================
+     FEATURED ARTICLE
+========================= -->
+
+{% if featured_post %}
+
+<div class="card featured-blog-card mb-5 shadow-lg overflow-hidden position-relative">
+
+    <div class="card-body p-4 p-lg-5">
+
+        <!-- Category + Read Time -->
+
+        <div class="d-flex align-items-center gap-2 mb-3">
+
+            <span class="badge bg-primary px-3 py-2 rounded-pill fw-bold">
+                {{ featured_post.category }}
+            </span>
+
+            <span class="featured-label">
+                Featured Guide
+            </span>
+
+            <span class="blog-muted">
+                • {{ featured_post.read_time }}
+            </span>
+
+        </div>
+
+
+        <!-- Title -->
+
+        <h2 class="h1 fw-bold mb-3">
+
+            <a
+                href="{{ url_for('blog.detail', slug=featured_post.slug) }}"
+                class="blog-post-title text-decoration-none"
+            >
+                {{ featured_post.title }}
+            </a>
+
+        </h2>
+
+
+        <!-- Summary -->
+
+        <p class="featured-summary fs-5 mb-4">
+
+            {{ featured_post.summary }}
+
+        </p>
+
+
+        <!-- Bottom Section -->
+
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+
+            <div class="featured-meta">
+
+                <span>
+                    By <strong>{{ featured_post.author }}</strong>
+                </span>
+
+                <span>•</span>
+
+                <span>
+                    {{ featured_post.created_at.strftime('%B %d, %Y') if featured_post.created_at }}
+                </span>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('blog.detail', slug=featured_post.slug) }}"
+                class="btn btn-primary btn-lg px-4 fw-bold rounded-pill shadow-sm"
+            >
+                Read Full Guide &rarr;
+            </a>
+
+        </div>
+
+    </div>
+
 </div>
+
 {% endif %}
 
-<!-- CTA Banner -->
-<div class="card bg-primary text-white p-4 p-lg-5 text-center shadow-lg border-0 my-5" style="border-radius: 20px;">
-  <div class="max-width-700 mx-auto">
-    <h2 class="fw-extrabold mb-3">Want to check your resume's ATS match score?</h2>
-    <p class="fs-5 mb-4 text-white text-opacity-90">
-      Upload your document to our AI scanner to analyze missing keywords, formatting errors, and overall ATS compatibility in seconds.
-    </p>
-    <a href="{{ url_for('index') }}" class="btn btn-light btn-lg px-5 py-3 fw-bold text-primary rounded-pill shadow-sm">
-      🚀 Analyze My Resume Now
-    </a>
-  </div>
+
+
+<!-- =========================
+     BLOG POST GRID
+========================= -->
+
+{% if posts %}
+
+<div class="row g-4 mb-5">
+
+    {% for post in posts %}
+
+    <div class="col-md-6 col-lg-4">
+
+        <div class="card blog-card h-100 shadow-sm d-flex flex-column">
+
+            <div class="card-body d-flex flex-column p-4">
+
+
+                <!-- Category + Read Time -->
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+
+                    <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill small fw-bold">
+
+                        {{ post.category }}
+
+                    </span>
+
+
+                    <small class="blog-muted">
+
+                        {{ post.read_time }}
+
+                    </small>
+
+                </div>
+
+
+                <!-- Blog Title -->
+
+                <h3 class="h5 fw-bold mb-2">
+
+                    <a
+                        href="{{ url_for('blog.detail', slug=post.slug) }}"
+                        class="blog-post-title text-decoration-none"
+                    >
+
+                        {{ post.title }}
+
+                    </a>
+
+                </h3>
+
+
+                <!-- Summary -->
+
+                <p class="blog-summary small mb-4 flex-grow-1">
+
+                    {{ post.summary }}
+
+                </p>
+
+
+                <!-- Footer -->
+
+                <div class="blog-card-footer pt-3 d-flex justify-content-between align-items-center">
+
+                    <small class="blog-muted">
+
+                        By {{ post.author }}
+
+                    </small>
+
+
+                    <a
+                        href="{{ url_for('blog.detail', slug=post.slug) }}"
+                        class="read-more-link fw-bold text-decoration-none small"
+                    >
+
+                        Read More &rarr;
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
 </div>
+
+
+
+<!-- =========================
+     EMPTY STATE
+========================= -->
+
+{% else %}
+
+<div class="text-center py-5">
+
+    <h3 class="empty-blog-title">
+
+        No articles found matching your criteria.
+
+    </h3>
+
+
+    <p class="blog-hero-description mb-4">
+
+        Try searching for broader keywords like "ATS", "Resume", or "Skills".
+
+    </p>
+
+
+    <a
+        href="{{ url_for('blog.index') }}"
+        class="btn btn-outline-dark category-btn"
+    >
+
+        View All Articles
+
+    </a>
+
+</div>
+
+{% endif %}
+
+
+
+<!-- =========================
+     CTA BANNER
+========================= -->
+
+<div class="card blog-cta p-4 p-lg-5 text-center shadow-lg my-5">
+
+    <div class="max-width-700 mx-auto">
+
+        <h2 class="fw-extrabold mb-3">
+
+            Want to check your resume's ATS match score?
+
+        </h2>
+
+
+        <p class="fs-5 mb-4">
+
+            Upload your document to our AI scanner to analyze missing keywords,
+            formatting errors, and overall ATS compatibility in seconds.
+
+        </p>
+
+
+        <a
+            href="{{ url_for('index') }}"
+            class="btn btn-light btn-lg px-5 py-3 fw-bold rounded-pill shadow-sm"
+        >
+
+            🚀 Analyze My Resume Now
+
+        </a>
+
+    </div>
+
+</div>
+
 {% endblock %}
